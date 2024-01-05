@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 if __name__ == "__main__":
-   from  import sys import argv
+   from sys import argv
 
     a = len(argv) - 1
-    if a == 1:
+    if a < 1:
         print("{} arguments.".format(a))
     elif a == 1:
         print("{} argument:".format(a))
