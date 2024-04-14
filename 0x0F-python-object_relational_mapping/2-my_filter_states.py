@@ -1,15 +1,22 @@
 #!/usr/bin/python3
-"""script that takes in an argument and displays all values in the states table"""
-import MySQLdb
+
+"""Module that lists all states from the hbtn_0e_0_usa database."""
+
 import sys
-if ___name___ == "___main___":
-    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
-                        password=sys.argv[2], db=sys.argv[3], port=3306)
+import MySQLdb
+
+if __name__ == "__main__":
+
+    # Get MySQL credentials and search name from command-line arguments
+    # and # Connect to MySQL server
+    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
     c = db.cursor()
-    c.excute("SELECT * FROM states WHERE name LIKE BINARY '{}'"
-                .format(sys.argv[4]))
-    rows = fetchall()
-    for  row in rows:
-        print(row)
-    c.close()
-    db.close()
+
+    # Execute the SQL query to retrieve states with the specified name
+    c.execute("SELECT * \
+                 FROM `states` \
+                WHERE BINARY `name` = '{}'".format(sys.argv[4]))
+
+    # Fetch all rows and print the states
+    [print(state) for state in c.fetchall()]
+
